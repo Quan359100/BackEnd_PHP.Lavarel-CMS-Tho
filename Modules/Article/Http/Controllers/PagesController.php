@@ -121,6 +121,53 @@ class PagesController extends Controller
             ], 500);
         }
     }
+
+    /**
+     * Get pages by ordering (API)
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */    
+    public function getAllPagesSortedByDate(Request $request)
+    {
+        try {
+            // Lấy toàn bộ dữ liệu từ bảng `page` và sắp xếp theo ngày (giả sử trường ngày là `created_at`)
+            $pages = Page::orderBy('created_at', 'desc')->get();
+    
+            // Decode HTML entities and create full image URLs for all fields of each page
+            $decodedPages = $pages->map(function ($page) {
+                foreach ($page->getAttributes() as $key => $value) {
+                    // Decode HTML entities if the value is a string
+                    if (is_string($value)) {
+                        $page->$key = html_entity_decode($value, ENT_QUOTES, 'UTF-8');
+                    }
+                }
+                // Append the base path to the image filename to create a full image URL
+                if (!empty($page->image)) {
+                    $page->image_url = url('public/assets/images/pages/' . $page->image);
+                }
+                // Append the base path to the image filename to create a full image URL
+                if (!empty($page->banner_image)) {
+                    $page->banner_image_url = url('public/assets/images/pages/' . $page->banner_image);
+                }
+
+                // Thêm thông tin danh mục
+                $page->category_name = $page->category ? $page->category->name : null;
+
+                return $page;
+            });
+    
+            return response()->json([
+                'status' => 'success',
+                'data' => $decodedPages
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
     
 
      
@@ -161,6 +208,7 @@ class PagesController extends Controller
         }
     }
 
+    
     /**
      * Get list of pages by category with pagination and ordering (API)
      *
@@ -198,24 +246,41 @@ class PagesController extends Controller
             }
     
             // Query pages by category with pagination and ordering
-            $pages = Page::select('id', 'title') // Including 'id' in the select
+            $pages = Page::select('id', 'title', 'pub_date','banner_image') // Including 'id' in the select
                 ->where('category_id', $categoryId)
                 ->orderBy($orderBy)
                 ->offset($offset)
                 ->limit($limit)
                 ->get();
-    
+                
             // Decode HTML entities in the 'title' field
             $decodedPages = $pages->map(function ($page) {
                 $page->title = html_entity_decode($page->title, ENT_QUOTES, 'UTF-8');
+                if (!empty($page->banner_image)) {
+                    $page->image_url = url('public/assets/images/pages/' . $page->banner_image);
+                }else{
+                    $page->image_url = '';
+                }
                 return $page;
             });
-    
+
+
+            // Get category name and description, and decode them
+            $category = Category::select('id','name', 'description','banner_image')->where('id', $categoryId)->first();
+            $decodedCategoryName = html_entity_decode($category->name, ENT_QUOTES, 'UTF-8');
+            $decodedCategoryDescription = html_entity_decode($category->description, ENT_QUOTES, 'UTF-8');
+            if (!empty($category->banner_image)) {
+                $categoryBannerImage = url('public/assets/images/category/' . $category->banner_image);
+            }    
             $total = Page::where('category_id', $categoryId)->count();
     
             return response()->json([
                 'status' => 'success',
                 'data' => $decodedPages,
+                'category_name' => $decodedCategoryName,
+                'category_id'=> $category->id,
+                'category_description' => $decodedCategoryDescription,
+                'category_bannerImage' => $categoryBannerImage,
                 'total' => $total
             ], 200);
         } catch (\Exception $e) {
@@ -241,26 +306,43 @@ class PagesController extends Controller
     
         try {
             $pageId = $request->input('id');
-            $pages = Page::select('description')
+            $page = Page::with('category:id,name') // Lấy thêm thông tin category_name
+                ->select('id', 'title', 'short_description', 'description', 'tag', 'authors', 'pub_date', 'image', 'category_id')
                 ->where('id', $pageId)
-                ->get();
+                ->first();
+    
+            if (!$page) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Page not found'
+                ], 404);
+            }
     
             // Encode dữ liệu tiếng Việt trước khi gửi qua API
-            $encodedPages = $pages->map(function ($page) {
-                $page->description = html_entity_decode($page->description, ENT_QUOTES, "UTF-8");
-                return $page;
-            });
+            $page->description = html_entity_decode($page->description, ENT_QUOTES, "UTF-8");
+            $page->short_description = html_entity_decode($page->short_description, ENT_QUOTES, "UTF-8");
+            $page->title = html_entity_decode($page->title, ENT_QUOTES, "UTF-8");
+            $page->tag = html_entity_decode($page->tag, ENT_QUOTES, "UTF-8");
+    
+            if (!empty($page->image)) {
+                $page->image_url = url('public/assets/images/pages/' . $page->image);
+            } else {
+                $page->image_url = '';
+            }
+    
+            // Lấy category_name từ mối quan hệ với Category
+            $page->category_name = $page->category ? $page->category->name : null;
     
             return response()->json([
                 'status' => 'success',
-                'data' => $encodedPages,
+                'data' => $page,
             ], 200)->header('Content-Type', 'application/json; charset=UTF-8');
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage()
             ], 500);
-        } 
+        }
     }
 
     /**
@@ -306,6 +388,7 @@ class PagesController extends Controller
         }
     }
     
+
 
     /**
      * Display a listing of the resource.
@@ -483,7 +566,6 @@ class PagesController extends Controller
             'title'  => 'required|max:100',
             'slug'  => 'nullable|max:100|unique:pages,slug',
             'pub_date' => 'required',
-            'image'  => 'nullable|image',
             'authors'  => 'required|max:100'
         ]);
 
@@ -497,6 +579,10 @@ class PagesController extends Controller
                 $page->slug = StringHelper::createSlug($request->title, 'Modules\Article\Entities\Page', 'slug', '-', true);
             }
 
+            if (!is_null($request->banner_image)) {
+                $page->banner_image = UploadHelper::upload('banner_image', $request->banner_image, $request->title . '-' . time() . '-banner', 'public/assets/images/pages');
+            }
+
             if (!is_null($request->image)) {
                 $page->image = UploadHelper::upload('image', $request->image, $request->title . '-' . time() . '-logo', 'public/assets/images/pages');
             }
@@ -507,7 +593,7 @@ class PagesController extends Controller
             $page->status = $request->status;
             $page->authors = $request->authors;
             $page->description = $request->description;
-            //$page->meta_description = $request->meta_description;
+            $page->short_description = $request->short_description;
             $page->created_at = Carbon::now();
             $page->created_by = Auth::id();
             $page->updated_at = Carbon::now();
@@ -599,10 +685,15 @@ class PagesController extends Controller
                 $page->banner_image = UploadHelper::update('banner_image', $request->banner_image, $request->title . '-' . time() . '-banner', 'public/assets/images/pages', $page->banner_image);
             }
 
+            if (!is_null($request->image)) {
+                $page->image = UploadHelper::upload('image', $request->image, $request->title . '-' . time() . '-logo', 'public/assets/images/pages');
+            }
+
             $page->category_id = $request->category_id;
             $page->article_type_id = $request->article_type_id;
             $page->status = $request->status;
             $page->description = $request->description;
+            $page->short_description = $request->short_description;
             $page->authors = $request->authors;
             $page->updated_by = Auth::id();
             $page->updated_at = Carbon::now();

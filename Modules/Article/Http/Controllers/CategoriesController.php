@@ -35,19 +35,26 @@ class CategoriesController extends Controller
     public function getCategories()
     {
         try {
-            $categories = Category::where('status', 1) // Lấy các danh mục hoạt động
-                ->whereNull('deleted_at') // Loại trừ các danh mục đã bị xóa (soft delete)
+            // Lấy các danh mục hoạt động, không bị xóa và có độ ưu tiên được xắp xếp
+            $categories = Category::where('status', 1)
+                ->whereNull('deleted_at')
                 ->orderBy('priority', 'asc')
-                ->get(['id', 'name', 'slug']); // Chỉ lấy các trường cần thiết
+                ->get(['id', 'name', 'slug', 'banner_image']); // Giả sử trường lưu tên ảnh là 'banner'
     
-            // Decode HTML entities cho các trường có dữ liệu dạng chuỗi
+
+    
+            // Thêm URL vào tên ảnh và decode HTML entities
             $decodedCategories = $categories->map(function ($category) {
                 foreach ($category->getAttributes() as $key => $value) {
-                    // Kiểm tra liệu giá trị có phải là chuỗi không trước khi decode
                     if (is_string($value)) {
+                        // Decode HTML entities cho các trường khác có dữ liệu dạng chuỗi
                         $category->$key = html_entity_decode($value, ENT_QUOTES, 'UTF-8');
                     }
                 }
+                // Append the base path to the image filename to create a full image URL
+                if (!empty($category->banner_image)) {
+                    $category->banner_image_url = url('public/assets/images/category/' . $category->banner_image);
+                }                
                 return $category;
             });
     
@@ -222,6 +229,11 @@ class CategoriesController extends Controller
             } else {
                 $category->slug = StringHelper::createSlug($request->name, 'Modules\Article\Entities\Category', 'slug', '-', true);
             }
+
+            // Append the base path to the image filename to create a full image URL
+            if (!is_null($request->banner_image)) {
+                $category->banner_image = UploadHelper::upload('banner_image', $request->banner_image, $request->name . '-' . time() . '-banner', 'public/assets/images/category');
+            }      
             $category->status = $request->status;
             $category->description = $request->description;
             $category->priority = $request->priority ? $request->priority : 1;
@@ -308,13 +320,18 @@ class CategoriesController extends Controller
 
         try {
             DB::beginTransaction();
+
+            if (!is_null($request->banner_image)) {
+                $category->banner_image = UploadHelper::update('banner_image', $request->banner_image, $request->name . '-' . time() . '-banner', 'public/assets/images/category', $category->banner_image);
+            }
+
             $category->name = $request->name;
             $category->slug = $request->slug;
             $category->status = $request->status;
             $category->description = $request->description;
             $category->priority = $request->priority;
             $category->updated_by = Auth::id();
-            $category->updated_at = Carbon::now();
+            $category->updated_at = Carbon::now();  
             $category->save();
 
             // Update priority column

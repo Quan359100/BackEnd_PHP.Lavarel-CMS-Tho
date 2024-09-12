@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 07, 2024 at 09:05 PM
+-- Generation Time: Aug 07, 2024 at 02:08 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -94,7 +94,7 @@ CREATE TABLE `author` (
 --
 
 INSERT INTO `author` (`id`, `description`, `status`, `deleted_at`, `created_by`, `updated_by`, `deleted_by`, `created_at`, `updated_at`, `authors`) VALUES
-(12, '<p style=\"font-weight: 400;\"><strong>- Họ v&agrave; t&ecirc;n</strong><em>:<span>&nbsp;</span><strong>Trần Văn M&agrave;u</strong></em><span>&nbsp;</span>&nbsp;&nbsp;&nbsp;B&uacute;t danh:<span>&nbsp;</span><strong>Bằng Lăng</strong></p>\r\n<p style=\"font-weight: 400;\"><strong>- Năm sinh: 1966</strong></p>\r\n<p style=\"font-weight: 400;\"><strong>- Qu&ecirc; qu&aacute;n: x&atilde; Long Thắng, huyện Lai Vung, tỉnh Đồng Th&aacute;p</strong></p>\r\n<p style=\"font-weight: 400;\"><strong>- Nơi ở hiện nay</strong>:<span>&nbsp;</span><strong><em>750 ấp B&igrave;nh Lợi, x&atilde; B&igrave;nh Th&agrave;nh, huyện Lấp V&ograve;, tỉnh Đồng Th&aacute;p</em></strong></p>\r\n<p style=\"font-weight: 400;\"><strong>- Chức vụ v&agrave; nơi c&ocirc;ng t&aacute;c</strong>:<span>&nbsp;</span><strong>Gi&aacute;o vi&ecirc;n - Tổ trưởng tổ Ngữ văn - GDCD</strong>, trường THCS B&igrave;nh Th&agrave;nh, huyện Lấp V&ograve;, tỉnh Đồng Th&aacute;p.</p>\r\n<p style=\"font-weight: 400;\">- Ủy vi&ecirc;n BCH ph&acirc;n hội VHNT tỉnh Đồng Th&aacute;p</p>\r\n<p style=\"font-weight: 400;\">- Ủy vi&ecirc;n BCH hội VHNT huyện Lấp V&ograve;</p>\r\n<p style=\"font-weight: 400;\">- Th&agrave;nh vi&ecirc;n Tao Đ&agrave;n tỉnh An Giang &ndash; Hội LHVH NT tỉnh An Giang</p>', 1, NULL, 1, NULL, NULL, '2024-08-07 11:01:38', '2024-08-07 11:01:38', 'Bằng Lăng Tím');
+(11, '<p>https://en.wikipedia.org/wiki/George_R._R._Martin</p>', 1, NULL, 1, 1, NULL, '2024-08-02 22:13:53', '2024-08-07 05:04:33', 'G.Martin');
 
 -- --------------------------------------------------------
 
@@ -136,10 +136,9 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `slug`, `description`, `status`, `enable_bg`, `text_color`, `priority`, `deleted_at`, `created_by`, `updated_by`, `deleted_by`, `created_at`, `updated_at`) VALUES
-(1, 'Thơ', 'thơ', NULL, 1, 0, '000000', 1, NULL, NULL, NULL, NULL, '2024-06-28 23:14:33', '2024-06-28 23:14:33'),
-(2, 'Văn', 'văn', NULL, 1, 0, '000000', 1, NULL, NULL, NULL, NULL, '2024-06-28 23:14:33', '2024-06-28 23:14:33'),
-(5, 'Non-Fiction', 'non-fiction', NULL, 1, 0, '000000', 5, NULL, 1, NULL, NULL, '2024-08-07 09:49:37', '2024-08-07 09:49:37'),
-(6, 'Fiction', 'fiction', NULL, 1, 0, '000000', 6, NULL, 1, NULL, NULL, '2024-08-07 09:50:26', '2024-08-07 09:50:26');
+(1, 'Thơ', 'life-style', NULL, 1, 0, '000000', 1, NULL, NULL, NULL, NULL, '2024-06-28 23:14:33', '2024-06-28 23:14:33'),
+(2, 'Văn', 'fashion', NULL, 1, 0, '000000', 1, NULL, NULL, NULL, NULL, '2024-06-28 23:14:33', '2024-06-28 23:14:33'),
+(4, 'Fiction', 'non-fiction', '<p>Non-Fiction l&agrave; truyện hư cấu</p>', 0, 0, '000000', 4, '2024-08-06 10:17:45', 1, 1, 1, '2024-08-06 10:02:18', '2024-08-06 10:17:45');
 
 -- --------------------------------------------------------
 
@@ -348,12 +347,8 @@ CREATE TABLE `pages` (
 --
 
 INSERT INTO `pages` (`id`, `slug`, `description`, `image`, `category_id`, `article_type_id`, `status`, `deleted_at`, `created_by`, `updated_by`, `deleted_by`, `created_at`, `updated_at`, `tag`, `authors`, `title`, `pub_date`) VALUES
-(19, 'nói-nhỏ', '<p>Anh y&ecirc;u ơi! Gh&eacute; tai em n&oacute;i nhỏ</p>\r\n<p>Sẽ b&ecirc;n người m&atilde;i m&atilde;i chẳng đ&ocirc;̉i thay</p>\r\n<p>Nguyện b&ecirc;n anh y&ecirc;u m&atilde;i m&atilde;i suốt đời n&agrave;y</p>\r\n<p>Sưởi nồng ấm, những đ&ecirc;m đ&ocirc;ng lạnh gi&aacute;&hellip;</p>', NULL, 1, NULL, 1, NULL, 1, 1, NULL, '2024-08-03 01:02:07', '2024-08-07 10:14:48', 'Thơ', 'Mr.V', 'Nói Nhỏ', '2024-08-03'),
-(21, 'hà-nội-mùa-cúc-họa-mi', '<div class=\"paragraph\">Đ&ocirc;ng H&agrave; Nội họa mi c&uacute;c nở</div>\r\n<div class=\"paragraph\">C&aacute;nh mỏng xinh rạng rỡ b&ecirc;n thềm</div>\r\n<div class=\"paragraph\">Thu qua nỗi nhớ nhiều th&ecirc;m</div>\r\n<div class=\"paragraph\">L&aacute; v&agrave;ng tr&uacute;t rụng &ecirc;m đềm lối xưa</div>\r\n<div class=\"paragraph\">Phố ng&aacute;i ngủ như vừa tỉnh giấc</div>\r\n<div class=\"paragraph\">Gi&oacute; lang thang gh&eacute; bậc hi&ecirc;n nh&agrave;</div>\r\n<div class=\"paragraph\">Ngỡ ng&agrave;ng trước những nụ hoa</div>\r\n<div class=\"paragraph\">Tinh kh&ocirc;i c&aacute;nh trắng mượt m&agrave; đ&aacute;ng y&ecirc;u</div>\r\n<div class=\"paragraph\">T&agrave; &aacute;o mỏng diễm kiều d&aacute;ng ngọc</div>\r\n<div class=\"paragraph\">Mắt nhung huyền m&aacute;i t&oacute;c ngang vai</div>\r\n<div class=\"paragraph\">Xinh tươi đượm n&eacute;t trang đ&agrave;i</div>\r\n<div class=\"paragraph\">Dạo tr&ecirc;n phố nhỏ l&agrave;m ai ngẩn nh&igrave;n</div>\r\n<div class=\"paragraph\">Bao kỷ niệm hằn in t&acirc;m tr&iacute;</div>\r\n<div class=\"paragraph\">Ly c&agrave; ph&ecirc; thơm vị ngọt ng&agrave;o</div>\r\n<div class=\"paragraph\">Ấm nồng hạnh ph&uacute;c ta trao</div>\r\n<div class=\"paragraph\">Họa mi c&uacute;c nở quyện v&agrave;o hồn thơ</div>\r\n<div class=\"paragraph\">Xa biết đến bao giờ gặp lại</div>\r\n<div class=\"paragraph\">Mối t&igrave;nh đầu đẹp m&atilde;i nh&eacute; anh</div>\r\n<div class=\"paragraph\">Tr&aacute;i tim em đ&atilde; ri&ecirc;ng d&agrave;nh</div>\r\n<div class=\"paragraph\">Hai ngăn chứa cả t&igrave;nh xanh ch&uacute;ng m&igrave;nh.</div>', NULL, 1, NULL, 1, NULL, 1, NULL, NULL, '2024-08-07 10:14:31', '2024-08-07 10:14:31', 'Thơ', 'Bằng Lăng Tím', 'Hà Nội mùa cúc họa mi', '2024-08-08'),
-(22, 'tìm-lại-những-mùa-đông-hà-nội', '<div class=\"paragraph\">H&agrave; Nội đ&ecirc;m m&ugrave;a đ&ocirc;ng!</div>\r\n<div class=\"paragraph\">L&agrave;nh lạnh heo may ph&iacute;a s&ocirc;ng Hồng thổi tới,</div>\r\n<div class=\"paragraph\">Ngọn đ&egrave;n v&agrave;ng ng&oacute;ng ai m&agrave; đứng đợi</div>\r\n<div class=\"paragraph\">Hương sữa thoảng nồng n&agrave;n dệt sợi nhớ, sợi thương...</div>\r\n<div class=\"paragraph\">H&agrave; Nội trải m&ugrave; sương,</div>\r\n<div class=\"paragraph\">Những con đường kho&aacute;c l&ecirc;n m&agrave;u &aacute;o cũ,</div>\r\n<div class=\"paragraph\">Những n&oacute;c phố th&acirc;m nghi&ecirc;m x&ocirc; nghi&ecirc;ng cả một thời qu&aacute; khứ</div>\r\n<div class=\"paragraph\">Bước ch&acirc;n người c&ocirc; lữ chợt hanh hao.</div>\r\n<div class=\"paragraph\">L&ograve;ng b&acirc;ng khu&acirc;ng nhớ kỷ niệm năm n&agrave;o:</div>\r\n<div class=\"paragraph\">Tiếng t&agrave;u điện leng keng...leng keng vọng về trong hư ảo,</div>\r\n<div class=\"paragraph\">Hương Ngọc lan lối hẹn h&ograve; nhuộm thơm m&ugrave;i nếp &aacute;o</div>\r\n<div class=\"paragraph\">Thoảng đ&acirc;u đ&acirc;y hơi ấm mối t&igrave;nh đầu...</div>\r\n<div class=\"paragraph\">Vẫn c&ograve;n đ&oacute;, những h&agrave;ng c&acirc;y im lặng, d&atilde;i dầu</div>\r\n<div class=\"paragraph\">Vẫn c&ograve;n đ&oacute;, giọng rao đ&ecirc;m lắng s&acirc;u miền k&yacute; ức</div>\r\n<div class=\"paragraph\">&Aacute;nh trăng mờ thao thức</div>\r\n<div class=\"paragraph\">Để b&agrave;n ch&acirc;n người ra đi day dứt lối xưa về</div>\r\n<div class=\"paragraph\">Chợt thấy l&ograve;ng t&aacute;i t&ecirc; !</div>\r\n<div class=\"paragraph\">N&agrave;o ai hiểu qu&atilde;ng thời gian l&ecirc; th&ecirc; nơi đất kh&aacute;ch</div>\r\n<div class=\"paragraph\">Nhưng c&ograve;n đ&oacute; H&agrave; Nội th&acirc;n thương khiến t&acirc;m hồn gột sạch</div>\r\n<div class=\"paragraph\">Để c&aacute;nh chim trời sau bao năm xa c&aacute;ch về t&igrave;m lại những m&ugrave;a đ&ocirc;ng...</div>', NULL, 1, NULL, 1, NULL, 1, NULL, NULL, '2024-08-07 10:15:29', '2024-08-07 10:15:29', NULL, 'Đỗ Kim Quang', 'Tìm lại những mùa đông Hà Nội', '2024-08-08'),
-(23, 'poor-or-rich', '<p><span>One day, a rich dad took his son on a trip to a poor village. He wanted to show his son how the people in the village lived. They spent time on a farm of one of the poorest families. At the end of the day, the dad asked: &ldquo;Did you see how poor they are? What did you learn?&rdquo;</span><br /><span>The boy answered: &ldquo;We have a dog, they have four. We have a pool, they have a river. We buy food and they grow theirs. We have walls to protect us, they have friends.&rdquo;</span><br /><span>After they left, the boy wanted to tell his dad the truth. &ldquo;Well, thanks for showing me how poor we are&rdquo;, said the boy.</span></p>', NULL, 6, NULL, 1, NULL, 1, NULL, NULL, '2024-08-07 10:22:01', '2024-08-07 10:22:01', 'Văn', 'Vô Danh', 'Poor or rich', '2024-08-08'),
-(24, 'never-tell-a-lie', '<p><span>On his deathbed, a father advised his son to always speak the truth. The son promised that he would never tell a lie. One day, while going to the city through a forest, he got surrounded by some robbers. One of them asked, &ldquo;What do you have?&rdquo; The boy answered, &ldquo;I have fifty rupees.&rdquo; They searched for him but couldn&rsquo;t find anything. When they were about to go, the boy called out, &ldquo;I am not telling a lie. See this fifty rupee note which I had hidden in my shirt.&rdquo; The leader of the robbers felt pleased with the truthfulness of the boy, gave him a hundred rupees as a reward and went away.</span></p>', NULL, 6, NULL, 1, NULL, 1, NULL, NULL, '2024-08-07 10:22:45', '2024-08-07 10:22:45', NULL, 'Vô Danh', 'Never tell a lie', '2024-08-08'),
-(25, 'tiếng-hót-chim-sơn-ca', '<p class=\"block2\">Trời thu, nắng đẹp.</p>\r\n<p class=\"block2\">T&ocirc;i đẩy cổng bước v&agrave;o vườn nh&agrave; người bạn chơi chim. &Ocirc;ng chủ reo to:</p>\r\n<p class=\"block2\">- Nh&agrave; văn! Ai b&aacute;o m&agrave; biết đấy?</p>\r\n<p class=\"block2\">Thấy t&ocirc;i ngơ ng&aacute;c, &ocirc;ng cười vui:</p>\r\n<p class=\"block2\">- V&ocirc; t&igrave;nh hả? C&agrave;ng hay!</p>\r\n<p class=\"block2\">&Ocirc;ng quay lại n&oacute;i với người kh&aacute;ch đầu bạc:</p>\r\n<p class=\"block2\">- C&oacute; thể&hellip; điềm l&agrave;nh cho ta đ&acirc;y.</p>\r\n<p class=\"block2\">Ch&uacute;ng t&ocirc;i ngồi tr&ecirc;n thảm bẹ ng&ocirc; trải tr&ecirc;n nền cỏ dưới b&oacute;ng một c&acirc;y nh&atilde;n cổ thụ. Đang say m&ecirc; thưởng thức hương vị thơm đậm của nước ch&egrave; trong c&aacute;i ch&eacute;n hạt m&iacute;t mộc, t&ocirc;i bỗng nghe tiếng h&oacute;t của họa mi. Tiếng h&oacute;t vang động, vui tươi, dồn dập.</p>\r\n<p class=\"block2\">- Họa mi h&oacute;t được nhiều giọng thật! &ndash; T&ocirc;i th&aacute;n phục.</p>\r\n<p class=\"block2\">Xem ra c&acirc;u n&oacute;i của t&ocirc;i nịnh được &ocirc;ng chủ &iacute;t nhiều, &ocirc;ng cười kh&agrave; kh&agrave;. Rồi &ocirc;ng thổi s&aacute;o miệng theo nhịp điệu n&agrave;o đ&oacute;. Con họa mi ngừng h&oacute;t, vươn người lắng nghe. &Ocirc;ng thổi v&agrave;i tiếng nữa, nhẹ như gi&oacute; thoảng qua. Nhưng con họa mi bắt nhận được ngay, n&oacute; đ&aacute;p lại bằng những chuỗi &acirc;m thanh &ecirc;m &aacute;i. N&oacute; h&oacute;t ngập ngừng, c&oacute; &lrm; &yacute; nghe ng&oacute;ng, tiếng cao dần, lảnh l&oacute;t. Sau lần s&aacute;o miệng thứ ba của &ocirc;ng chủ, t&ocirc;i thấy con họa mi đứng thẳng người, rướn ngực cất l&ecirc;n một b&agrave;i ca nhiều thanh sắc cao sang.</p>\r\n<p class=\"block2\">T&ocirc;i ngỡ ng&agrave;ng, b&igrave;nh thường tr&ocirc;ng tướng con họa mi rất dữ, sao b&acirc;y giờ n&oacute; dịu d&agrave;ng đến thế? Biết được &yacute; t&ocirc;i, &ocirc;ng chủ lại cười kh&agrave;:</p>\r\n<p class=\"block2\">- Từ hiền nh&acirc;n qu&acirc;n tử đến những kẻ qu&ecirc; m&ugrave;a cục mịch, ph&agrave;m đ&atilde; t&aacute;n g&aacute;i th&igrave; ai nấy cố l&ecirc;n giọng ngọt ng&agrave;o, quyến rũ. Ban n&atilde;y t&ocirc;i phải giả tiếng chim m&aacute;i đấy.</p>\r\n<p class=\"block2\">Ch&uacute;ng t&ocirc;i ồ cười, cũng chẳng tự hỏi cười m&igrave;nh hay cười con họa mi h&aacute;o sắc bị lừa. &Ocirc;ng chủ lại nẩy những tiếng s&aacute;o miệng ngắn. Con họa mi quay ngoắt đầu, lơ l&aacute;o nh&igrave;n quanh. Đến nhịp s&aacute;o thứ hai, n&oacute; nhảy chồm chồm về bốn ph&iacute;a, mắt long l&ecirc;n, c&aacute;c ng&oacute;n ch&acirc;n quắp chặt nan lồng như muốn ph&aacute; tung ra. Rồi n&oacute; h&oacute;t liến thoắng, những nhịp ngắn, dữ dằn. Chỉ một tiếng n&oacute; m&agrave; vang cả khu vườn như c&oacute; rất nhiều con đang ch&agrave;nh chọe với nhau.</p>\r\n<p class=\"block2\">- &Ocirc;ng n&oacute;i đến chất dữ dằn của n&oacute; th&igrave; đấy &ndash; &Ocirc;ng chủ bảo t&ocirc;i &ndash; T&ocirc;i giả tiếng chim trống, n&oacute; vội v&agrave;ng khẳng định quyền chủ l&atilde;nh địa của n&oacute;, đe dọa đối phương. C&ograve;n tiếng h&oacute;t của n&oacute; l&uacute;c &ocirc;ng mới đến l&agrave; tiếng h&oacute;t phởn phơ, phởn phơ khi được tắm m&aacute;t, được ăn ngon&hellip;</p>\r\n<p class=\"block2\">&Ocirc;ng cười, quay lại với mấy người kh&aacute;ch, lắc đầu:</p>\r\n<p class=\"block2\">- Mời c&aacute;c &ocirc;ng đến nghe tiếng sơn ca t&ocirc;i lại đi giới thiệu họa mi &hellip; Th&ocirc;i, &acirc;u cũng l&agrave; c&aacute;i sự đời!</p>\r\n<p class=\"block2\">Thấy t&ocirc;i kh&ocirc;ng hiều, &ocirc;ng kh&aacute;ch đầu bạc giải th&iacute;ch:</p>\r\n<p class=\"block2\">- Ch&uacute;ng t&ocirc;i h&acirc;m mộ tiếng h&oacute;t của chim sơn ca, đ&atilde; nhiều lần đến chầu chực ở đ&acirc;y cả buổi rồi lại về kh&ocirc;ng. Nghe n&oacute;i độ n&agrave;y con sơn ca hay h&oacute;t v&agrave;o qu&atilde;ng 10 giờ sang, h&ocirc;m qua ch&uacute;ng t&ocirc;i đến đ&acirc;y từ 9 giờ. M&atilde;i đến hơn 11 giờ trưa n&oacute; vẫn lặng thinh. Ch&uacute;ng t&ocirc;i vừa ra về th&igrave; n&oacute; h&oacute;t, tiếc thật! H&ocirc;m nay quyết chờ cho kỳ được.</p>\r\n<p class=\"block2\">T&ocirc;i thấy l&ograve;ng phấn chấn, n&oacute;i g&oacute;p:</p>\r\n<p class=\"block2\">- T&ocirc;i cũng từng được nghe n&oacute;i về tiếng h&oacute;t cao q&uacute;y của chim sơn ca v&agrave; cũng chưa một lần được thưởng thức. Liệu &ocirc;ng chủ c&oacute; thể gi&uacute;p ch&uacute;ng t&ocirc;i kh&ocirc;ng? Như với con họa mi ấy&hellip;.</p>\r\n<p class=\"block2\">&Ocirc;ng lắc đầu, nghi&ecirc;m chỉnh:</p>\r\n<p class=\"block2\">- Kh&aacute;c với c&aacute;c giống chim kh&aacute;c, con sơn ca kh&ocirc;ng h&oacute;t để mồi ch&agrave;i con m&aacute;i, kh&ocirc;ng h&oacute;t v&igrave; miếng ăn ngon, kh&ocirc;ng h&oacute;t v&igrave; chuyện tranh gi&agrave;nh, th&ugrave; hận. N&oacute; chỉ h&oacute;t khi n&oacute; th&iacute;ch h&oacute;t, kh&ocirc;ng c&oacute; c&aacute;ch g&igrave; k&iacute;ch th&iacute;ch được n&oacute;.</p>\r\n<p class=\"block2\">&Ocirc;ng lim dim mắt, giọng mơ m&agrave;ng:</p>\r\n<p class=\"block2\">- V&agrave; khi h&oacute;t, n&oacute; kh&ocirc;ng cần biết những g&igrave; ở xung quanh&hellip; To&agrave;n th&acirc;n n&oacute; rung l&ecirc;n, mỗi sợi long đều rung, n&oacute; từ từ bốc th&acirc;n l&ecirc;n cao tới khi lưng chạm v&agrave;o nan lồng lại từ từ hạ xuống&hellip; C&ograve;n tiếng h&oacute;t&hellip; Trời! Tiếng h&oacute;t&hellip;</p>\r\n<p class=\"block2\">Một l&aacute;t im lặng, mọi con mắt đều hướng về ph&iacute;a một c&aacute;i lồng cao, đan rất đẹp đặt ngay tr&ecirc;n mặt đất chỗ c&oacute; b&oacute;ng nắng lấp lo&aacute;ng. B&acirc;y giờ t&ocirc;i mới thật sự để &lrm; &yacute; thấy một con chim nhỏ, m&agrave;u n&acirc;u nhạt đa tha thẩn t&igrave;m bới đ&aacute;m c&aacute;t rải tr&ecirc;n đ&aacute;y lồng, con chim hiền h&ograve;a, giản dị, vẻ ngo&agrave;i kh&ocirc;ng c&oacute; g&igrave; đ&aacute;ng để &yacute;.</p>\r\n<p class=\"block2\">- N&oacute; giống con sẻ đồng qu&aacute; nhỉ! &ndash; T&ocirc;i thốt l&ecirc;n.</p>\r\n<p class=\"block2\">- Đ&uacute;ng vậy! &ndash; &Ocirc;ng chủ khẳng định &ndash; B&igrave;nh thường n&oacute; cũng hay kiếm ăn lẫn trong đ&aacute;m sẻ đồng, &iacute;t người ph&acirc;n biệt được n&oacute; l&agrave; sơn ca. Bọn đ&aacute;nh sẻ cũng thường bắt lẫn nhiều sơn ca, với họ th&igrave; chim l&agrave; để vặt long, buộc th&agrave;nh từng x&acirc;u mười con, mang b&aacute;n ở chợ Bắc Qua với gi&aacute; năm trăm đồng một con&hellip;</p>\r\n<p class=\"block2\">Giọng &ocirc;ng kh&agrave;n đi sau chuỗi ho khan:</p>\r\n<p class=\"block2\">- C&oacute; lần nh&igrave;n những x&acirc;u chim đ&oacute;, t&ocirc;i đ&atilde; ứa nước mắt, kh&ocirc;ng biết trong số n&agrave;y c&oacute; bao nhi&ecirc;u con sơn ca!</p>', NULL, 5, NULL, 1, NULL, 1, 1, NULL, '2024-08-07 10:30:19', '2024-08-07 10:31:16', 'Văn', 'Nguyễn Văn Hoan', 'Tiếng hót chim sơn ca', '2024-08-08');
+(19, 'nói-nhỏ', '<p>Anh y&ecirc;u ơi! Gh&eacute; tai em n&oacute;i nhỏ</p>\r\n<p>Sẽ b&ecirc;n người m&atilde;i m&atilde;i chẳng đ&ocirc;̉i thay</p>\r\n<p>Nguyện b&ecirc;n anh y&ecirc;u m&atilde;i m&atilde;i suốt đời n&agrave;y</p>\r\n<p>Sưởi nồng ấm, những đ&ecirc;m đ&ocirc;ng lạnh gi&aacute;&hellip;</p>', NULL, 2, NULL, 1, NULL, 1, 1, NULL, '2024-08-03 01:02:07', '2024-08-07 04:35:59', 'Thơ', 'Mr.V', 'Nói Nhỏ', '2024-08-03'),
+(20, 'game-of-throne', '<p><i><b>A Game of Thrones</b></i><span>&nbsp;is the first novel in&nbsp;</span><i><a href=\"https://en.wikipedia.org/wiki/A_Song_of_Ice_and_Fire\" title=\"A Song of Ice and Fire\">A Song of Ice and Fire</a></i><span>, a series of&nbsp;</span><a href=\"https://en.wikipedia.org/wiki/Fantasy\" title=\"Fantasy\">fantasy</a><span>&nbsp;novels by American author&nbsp;</span><a href=\"https://en.wikipedia.org/wiki/George_R._R._Martin\" title=\"George R. R. Martin\">George R. R. Martin</a><span>. It was first published on August 6</span></p>', NULL, 4, NULL, 1, NULL, 1, NULL, NULL, '2024-08-07 04:41:50', '2024-08-07 04:41:50', 'Fiction,Fantasy', 'G.Martin', 'Game of throne', '1980-07-08');
 
 -- --------------------------------------------------------
 
@@ -417,13 +412,16 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `group_name`, `created_at
 (28, 'page.edit', 'admin', 'page', '2024-06-28 23:14:32', '2024-06-28 23:14:32'),
 (29, 'page.delete', 'admin', 'page', '2024-06-28 23:14:32', '2024-06-28 23:14:32'),
 (30, 'author.view', 'admin', 'service', '2024-06-28 23:14:32', '2024-06-28 23:14:32'),
-(31, 'author.create', 'admin', 'service', '2024-06-28 23:14:32', '2024-06-28 23:14:32'),
-(32, 'author.edit', 'admin', 'service', '2024-06-28 23:14:32', '2024-06-28 23:14:32'),
-(33, 'author.delete', 'admin', 'service', '2024-06-28 23:14:32', '2024-06-28 23:14:32'),
-(37, 'poetry.view', 'admin', 'blog', '2024-06-28 23:14:32', '2024-06-28 23:14:32'),
-(38, 'poetry.create', 'admin', 'blog', '2024-06-28 23:14:32', '2024-06-28 23:14:32'),
-(39, 'poetry.edit', 'admin', 'blog', '2024-06-28 23:14:32', '2024-06-28 23:14:32'),
-(40, 'poetry.delete', 'admin', 'blog', '2024-06-28 23:14:32', '2024-06-28 23:14:32'),
+(31, 'poetry.create', 'admin', 'service', '2024-06-28 23:14:32', '2024-06-28 23:14:32'),
+(32, 'poetry.edit', 'admin', 'service', '2024-06-28 23:14:32', '2024-06-28 23:14:32'),
+(33, 'poetry.delete', 'admin', 'service', '2024-06-28 23:14:32', '2024-06-28 23:14:32'),
+(34, 'booking_request.view', 'admin', 'booking_request', '2024-06-28 23:14:32', '2024-06-28 23:14:32'),
+(35, 'booking_request.edit', 'admin', 'booking_request', '2024-06-28 23:14:32', '2024-06-28 23:14:32'),
+(36, 'booking_request.delete', 'admin', 'booking_request', '2024-06-28 23:14:32', '2024-06-28 23:14:32'),
+(37, 'author.view', 'admin', 'blog', '2024-06-28 23:14:32', '2024-06-28 23:14:32'),
+(38, 'author.create', 'admin', 'blog', '2024-06-28 23:14:32', '2024-06-28 23:14:32'),
+(39, 'author.edit', 'admin', 'blog', '2024-06-28 23:14:32', '2024-06-28 23:14:32'),
+(40, 'author.delete', 'admin', 'blog', '2024-06-28 23:14:32', '2024-06-28 23:14:32'),
 (41, 'slider.view', 'admin', 'slider', '2024-06-28 23:14:32', '2024-06-28 23:14:32'),
 (42, 'slider.create', 'admin', 'slider', '2024-06-28 23:14:32', '2024-06-28 23:14:32'),
 (43, 'slider.edit', 'admin', 'slider', '2024-06-28 23:14:32', '2024-06-28 23:14:32'),
@@ -434,6 +432,8 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `group_name`, `created_at
 (48, 'email_notification.edit', 'admin', 'notifications', '2024-06-28 23:14:32', '2024-06-28 23:14:32'),
 (49, 'email_message.view', 'admin', 'notifications', '2024-06-28 23:14:32', '2024-06-28 23:14:32'),
 (50, 'email_message.edit', 'admin', 'notifications', '2024-06-28 23:14:32', '2024-06-28 23:14:32'),
+(51, 'contact.view', 'admin', 'contacts', '2024-06-28 23:14:32', '2024-06-28 23:14:32'),
+(52, 'contact.create', 'admin', 'contacts', '2024-06-28 23:14:32', '2024-06-28 23:14:32'),
 (53, 'module.view', 'admin', 'module', '2024-06-28 23:14:32', '2024-06-28 23:14:32'),
 (54, 'module.create', 'admin', 'module', '2024-06-28 23:14:32', '2024-06-28 23:14:32'),
 (55, 'module.edit', 'admin', 'module', '2024-06-28 23:14:32', '2024-06-28 23:14:32'),
@@ -466,8 +466,11 @@ CREATE TABLE `poems` (
 --
 
 INSERT INTO `poems` (`id`, `title`, `slug`, `description`, `deleted_at`, `created_by`, `updated_by`, `deleted_by`, `created_at`, `updated_at`, `date`, `status`) VALUES
-(9, 'Sống', '', '<p>&ldquo;Nhịp sống vội v&atilde;, bước ch&acirc;n mỏi mệt</p>\r\n<p>Cuộc sống phồn hoa, lại chẳng c&oacute; được hạnh ph&uacute;c.&rdquo;</p>', NULL, 1, NULL, NULL, '2024-07-13 06:28:55', '2024-08-07 10:54:12', '2024-07-11', 1),
-(17, 'Nắng', 'nắng', '<p>&ldquo;Nắng đ&atilde; l&igrave;a xa, cơn mưa lạnh buốt,</p>\r\n<p>L&ograve;ng người lạc l&otilde;ng, nỗi buồn kh&ocirc;ng ngu&ocirc;i.&rdquo;</p>', NULL, 1, NULL, NULL, '2024-08-07 10:51:02', '2024-08-07 10:51:02', '2024-08-08', 1);
+(6, 'quan', 'quan-2', '<p>quan</p>\r\n<p>quan</p>\r\n<p>quan</p>', NULL, 1, NULL, NULL, '2024-07-13 06:08:24', '2024-07-13 06:08:24', '2024-07-12', 1),
+(8, 'le', 'le', '<p>Le</p>\r\n<p>Le</p>\r\n<p>Le</p>', NULL, 1, NULL, NULL, '2024-07-13 06:14:49', '2024-07-13 06:14:49', '2024-07-05', 1),
+(9, 'linh23', 'linh23', '<p>linh</p>\r\n<p>linh</p>\r\n<p>linh</p>', NULL, 1, NULL, NULL, '2024-07-13 06:28:55', '2024-07-13 06:28:55', '2024-07-11', 1),
+(11, 'quan123', 'quan123', '<p>iiiii</p>\r\n<p>ikki</p>\r\n<p>jkj</p>', NULL, 1, NULL, NULL, '2024-07-13 06:29:11', '2024-07-13 06:29:11', '2024-07-11', 1),
+(15, 'quan', 'quan-3', '<p>quan</p>\r\n<p>quan</p>', NULL, 1, NULL, NULL, '2024-07-29 13:46:58', '2024-07-29 13:46:58', '2024-07-10', 0);
 
 -- --------------------------------------------------------
 
@@ -542,6 +545,9 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (31, 4),
 (32, 4),
 (33, 4),
+(34, 4),
+(35, 4),
+(36, 4),
 (37, 4),
 (38, 4),
 (39, 4),
@@ -556,6 +562,8 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (48, 4),
 (49, 4),
 (50, 4),
+(51, 4),
+(52, 4),
 (53, 4),
 (54, 4),
 (55, 4),
@@ -583,14 +591,14 @@ CREATE TABLE `settings` (
 --
 
 INSERT INTO `settings` (`id`, `group`, `name`, `locked`, `payload`, `created_at`, `updated_at`) VALUES
-(1, 'general', 'name', 0, '\"CMS Th\\u01a1 V\\u0103n\"', '2024-06-28 23:14:32', '2024-08-07 10:44:55'),
-(2, 'general', 'logo', 0, '\"logo.png\"', '2024-06-28 23:14:32', '2024-08-07 10:44:55'),
-(3, 'general', 'favicon', 0, '\"favicon.ico\"', '2024-06-28 23:14:32', '2024-08-07 10:44:55'),
-(4, 'general', 'description', 0, 'null', '2024-06-28 23:14:32', '2024-08-07 10:44:55'),
-(5, 'general', 'copyright_text', 0, '\"Copyright \\u00a9 2024\"', '2024-06-28 23:14:32', '2024-08-07 10:44:55'),
+(1, 'general', 'name', 0, '\"CMS Th\\u01a1 V\\u0103n\"', '2024-06-28 23:14:32', '2024-08-02 13:47:53'),
+(2, 'general', 'logo', 0, '\"logo.png\"', '2024-06-28 23:14:32', '2024-08-02 13:47:53'),
+(3, 'general', 'favicon', 0, '\"favicon.ico\"', '2024-06-28 23:14:32', '2024-08-02 13:47:53'),
+(4, 'general', 'description', 0, 'null', '2024-06-28 23:14:32', '2024-08-02 13:47:53'),
+(5, 'general', 'copyright_text', 0, '\"Copyright \\u00a9 2024\"', '2024-06-28 23:14:32', '2024-08-02 13:47:53'),
 (6, 'general', 'meta_keywords', 0, 'null', '2024-06-28 23:14:32', '2024-08-01 22:39:50'),
 (7, 'general', 'meta_description', 0, 'null', '2024-06-28 23:14:32', '2024-08-01 22:39:50'),
-(8, 'general', 'meta_author', 0, '\"Quan\"', '2024-06-28 23:14:32', '2024-08-07 10:44:55'),
+(8, 'general', 'meta_author', 0, '\"Quan\"', '2024-06-28 23:14:32', '2024-08-02 13:47:53'),
 (9, 'contact', 'contact_no', 0, 'null', '2024-06-28 23:14:32', '2024-08-01 16:41:58'),
 (10, 'contact', 'phone', 0, 'null', '2024-06-28 23:14:32', '2024-08-01 16:41:58'),
 (11, 'contact', 'email_primary', 0, 'null', '2024-06-28 23:14:32', '2024-08-01 16:41:58'),
@@ -604,8 +612,8 @@ INSERT INTO `settings` (`id`, `group`, `name`, `locked`, `payload`, `created_at`
 (19, 'social', 'twitter', 0, '\"https:\\/\\/twitter.com\\/\"', '2024-06-28 23:14:32', '2024-08-01 22:39:50'),
 (20, 'social', 'youtube', 0, '\"https:\\/\\/youtube.com\\/\"', '2024-06-28 23:14:32', '2024-08-01 22:39:50'),
 (21, 'social', 'linkedin', 0, '\"https:\\/\\/linkedin.com\\/\"', '2024-06-28 23:14:32', '2024-08-01 22:39:50'),
-(22, 'api', 'list_api', 0, '\"<p><a href=\\\"..\\/api\\/categories\\\">http:\\/\\/localhost:8000\\/api\\/categories<\\/a><br \\/><a href=\\\"..\\/api\\/pages\\/random?limit=5;\\\"> http:\\/\\/localhost:8000\\/api\\/pages\\/random?limit=5<\\/a><br \\/>http:\\/\\/localhost:8000\\/api\\/category?id=2&amp;limit=15&amp;offset=0&amp;ordering=pubdate<br \\/>http:\\/\\/localhost:8000\\/api\\/article?id=19<br \\/>http:\\/\\/localhost:8000\\/api\\/chat?keyword=N%C3%B3i%20Nh%E1%BB%8F<br \\/><a href=\\\"..\\/api\\/config\\\">http:\\/\\/localhost:8000\\/api\\/config<\\/a><br \\/>http:\\/\\/localhost:8000\\/api\\/search?keyword=quan&amp;limit=10&amp;offset=0<\\/p>\\r\\n<p><\\/p>\"', '2024-06-28 23:14:32', '2024-08-07 10:44:55'),
-(23, 'api', 'data_setting_api', 0, '\"<p><span>Cu\\u1ed1n s&aacute;ch \\u0111\\u01b0\\u1ee3c \\u0111&aacute;nh gi&aacute; cao v\\u1ec1 kh\\u1ea3 n\\u0103ng quan s&aacute;t v&agrave; tinh t\\u1ebf c\\u1ee7a t&aacute;c gi\\u1ea3, c\\u0169ng nh\\u01b0 s\\u1ee9c m\\u1ea1nh c\\u1ee7a t\\u1eebng c&acirc;u ch\\u1eef. \\u0110&acirc;y l&agrave; m\\u1ed9t t&aacute;c ph\\u1ea9m ch\\u1ee9a \\u0111\\u1ef1ng nhi\\u1ec1u th&ocirc;ng \\u0111i\\u1ec7p &yacute; ngh\\u0129a v\\u1ec1 t&igrave;nh y&ecirc;u, \\u0111au kh\\u1ed5 v&agrave; hy v\\u1ecdng. D&ugrave; l&agrave; m\\u1ed9t t&aacute;c ph\\u1ea9m c\\u1ee7a m\\u1ed9t t&aacute;c gi\\u1ea3 tr\\u1ebb tu\\u1ed5i, &ldquo;M\\u1ed9t tho&aacute;ng ta r\\u1ef1c r\\u1ee1 \\u1edf nh&acirc;n gian&rdquo; \\u0111&atilde; chinh ph\\u1ee5c \\u0111\\u01b0\\u1ee3c tr&aacute;i tim c\\u1ee7a r\\u1ea5t nhi\\u1ec1u \\u0111\\u1ed9c gi\\u1ea3 tr&ecirc;n th\\u1ebf gi\\u1edbi.<\\/span><\\/p>\\r\\n<p><\\/p>\"', '2024-06-28 23:14:32', '2024-08-07 10:44:55');
+(22, 'api', 'list_api', 0, '\"<p><a href=\\\"..\\/api\\/categories\\\">http:\\/\\/localhost:8000\\/api\\/categories<\\/a>;<br \\/><a href=\\\"..\\/api\\/pages\\/random?limit=5;\\\"> http:\\/\\/localhost:8000\\/api\\/pages\\/random?limit=5;<\\/a><br \\/><a href=\\\"..\\/api\\/category;\\\">http:\\/\\/localhost:8000\\/api\\/category;<\\/a><br \\/><a href=\\\"..\\/api\\/categories\\\">http:\\/\\/localhost:8000\\/api\\/article<\\/a>;<br \\/><a href=\\\"..\\/api\\/categories\\\">http:\\/\\/localhost:8000\\/api\\/chat<\\/a>;<br \\/><a href=\\\"..\\/api\\/config\\\">http:\\/\\/localhost:8000\\/api\\/config;<\\/a><br \\/>http:\\/\\/localhost:8000\\/api\\/search?keyword=quan&amp;limit=10&amp;offset=0<\\/p>\\r\\n<p><\\/p>\"', '2024-06-28 23:14:32', '2024-08-02 13:47:53'),
+(23, 'api', 'data_setting_api', 0, '\"<p>Quan Dep Trai<\\/p>\\r\\n<p>Quan Dep Trai<\\/p>\\r\\n<p>Quan Dep Trai<\\/p>\"', '2024-06-28 23:14:32', '2024-08-02 13:47:53');
 
 -- --------------------------------------------------------
 
@@ -682,22 +690,7 @@ INSERT INTO `tracks` (`id`, `title`, `description`, `reference_link`, `admin_id`
 (52, 'Non-Fiction', 'New Category has been created', NULL, 1, NULL, NULL, '2024-08-06 10:02:18', '2024-08-06 10:02:18'),
 (53, 'non-fiction', 'Phân Loại đã được tạo!!', NULL, 1, NULL, NULL, '2024-08-06 10:14:25', '2024-08-06 10:14:25'),
 (54, 'Nói Nhỏ', 'Page has been updated successfully !!', NULL, 1, NULL, NULL, '2024-08-07 04:35:59', '2024-08-07 04:35:59'),
-(55, 'Game of throne', 'New Page has been created', NULL, 1, NULL, NULL, '2024-08-07 04:41:50', '2024-08-07 04:41:50'),
-(56, 'Settings', 'Setting was updated.', NULL, 1, NULL, NULL, '2024-08-07 05:30:33', '2024-08-07 05:30:33'),
-(57, 'Settings', 'Setting was updated.', NULL, 1, NULL, NULL, '2024-08-07 07:47:50', '2024-08-07 07:47:50'),
-(58, 'Non-Fiction', 'Phân Loại mới được tạo', NULL, 1, NULL, NULL, '2024-08-07 09:49:37', '2024-08-07 09:49:37'),
-(59, 'Fiction', 'Phân Loại mới được tạo', NULL, 1, NULL, NULL, '2024-08-07 09:50:26', '2024-08-07 09:50:26'),
-(60, 'Hà Nội mùa cúc họa mi', 'Tác Phẩm đã được tạo', NULL, 1, NULL, NULL, '2024-08-07 10:14:31', '2024-08-07 10:14:31'),
-(61, 'Nói Nhỏ', 'Tác Phẩm đã được sửa!!', NULL, 1, NULL, NULL, '2024-08-07 10:14:48', '2024-08-07 10:14:48'),
-(62, 'Tìm lại những mùa đông Hà Nội', 'Tác Phẩm đã được tạo', NULL, 1, NULL, NULL, '2024-08-07 10:15:29', '2024-08-07 10:15:29'),
-(63, 'Poor or rich', 'Tác Phẩm đã được tạo', NULL, 1, NULL, NULL, '2024-08-07 10:22:01', '2024-08-07 10:22:01'),
-(64, 'Never tell a lie', 'Tác Phẩm đã được tạo', NULL, 1, NULL, NULL, '2024-08-07 10:22:45', '2024-08-07 10:22:45'),
-(65, 'Tiếng hót chim sơn ca', 'Tác Phẩm đã được tạo', NULL, 1, NULL, NULL, '2024-08-07 10:30:19', '2024-08-07 10:30:19'),
-(66, 'Tiếng hót chim sơn ca', 'Tác Phẩm đã được sửa!!', NULL, 1, NULL, NULL, '2024-08-07 10:31:16', '2024-08-07 10:31:16'),
-(67, 'Settings', 'Setting was updated.', NULL, 1, NULL, NULL, '2024-08-07 10:36:25', '2024-08-07 10:36:25'),
-(68, 'Settings', 'Setting was updated.', NULL, 1, NULL, NULL, '2024-08-07 10:44:55', '2024-08-07 10:44:55'),
-(69, 'Nắng', 'New Service has been created', NULL, 1, NULL, NULL, '2024-08-07 10:51:02', '2024-08-07 10:51:02'),
-(70, 'Sống', 'Câu Thơ đã được update!!', NULL, 1, NULL, NULL, '2024-08-07 10:54:12', '2024-08-07 10:54:12');
+(55, 'Game of throne', 'New Page has been created', NULL, 1, NULL, NULL, '2024-08-07 04:41:50', '2024-08-07 04:41:50');
 
 -- --------------------------------------------------------
 
@@ -927,13 +920,13 @@ ALTER TABLE `article_types`
 -- AUTO_INCREMENT for table `author`
 --
 ALTER TABLE `author`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -963,7 +956,7 @@ ALTER TABLE `oauth_personal_access_clients`
 -- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -975,7 +968,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `poems`
 --
 ALTER TABLE `poems`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -993,7 +986,7 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `tracks`
 --
 ALTER TABLE `tracks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `users`

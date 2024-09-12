@@ -12,7 +12,7 @@ class Category extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'slug', 'description', 'status', 'bg_color', 'deleted_at', 'created_by', 'updated_by', 'deleted_by'
+        'name', 'slug', 'description', 'banner_image', 'status', 'bg_color', 'deleted_at', 'created_by', 'updated_by', 'deleted_by'
     ];
 
     public function pages()
@@ -20,41 +20,41 @@ class Category extends Model
         return $this->hasMany(Page::class)->where('status', 1);
     }
 
-    /**
-     * getCategories
-     *
-     * @param integer $status
-     * @param string $deleted_at
-     * @param integer $parent_category_id
-     * @return void
-     */
-    public static function getCategories($status = 1, $deleted_at = null)
-    {
-        try {
-            $categories = Category::where('status', 1) // Lấy các danh mục hoạt động
-                ->whereNull('deleted_at') // Loại trừ các danh mục đã bị xóa (soft delete)
-                ->orderBy('priority', 'asc')
-                ->get(['id', 'name', 'slug']); // Chỉ lấy các trường cần thiết
+    // /**
+    //  * getCategories
+    //  *
+    //  * @param integer $status
+    //  * @param string $deleted_at
+    //  * @param integer $parent_category_id
+    //  * @return void
+    //  */
+    // public static function getCategories($status = 1, $deleted_at = null)
+    // {
+    //     try {
+    //         $categories = Category::where('status', 1) // Lấy các danh mục hoạt động
+    //             ->whereNull('deleted_at') // Loại trừ các danh mục đã bị xóa (soft delete)
+    //             ->orderBy('priority', 'asc')
+    //             ->get(['id', 'name', 'slug']); // Chỉ lấy các trường cần thiết
     
-            // Decode HTML entities cho các trường có dữ liệu dạng chuỗi
-            $decodedCategories = $categories->map(function ($category) {
-                foreach ($category->getAttributes() as $key => $value) {
-                    // Kiểm tra liệu giá trị có phải là chuỗi không trước khi decode
-                    if (is_string($value)) {
-                        $category->$key = html_entity_decode($value, ENT_QUOTES, 'UTF-8');
-                    }
-                }
-                return $category;
-            });
+    //         // Decode HTML entities cho các trường có dữ liệu dạng chuỗi
+    //         $decodedCategories = $categories->map(function ($category) {
+    //             foreach ($category->getAttributes() as $key => $value) {
+    //                 // Kiểm tra liệu giá trị có phải là chuỗi không trước khi decode
+    //                 if (is_string($value)) {
+    //                     $category->$key = html_entity_decode($value, ENT_QUOTES, 'UTF-8');
+    //                 }
+    //             }
+    //             return $category;
+    //         });
     
-            return response()->json([
-                'success' => true,
-                'categories' => $decodedCategories
-            ]);
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
-    }
+    //         return response()->json([
+    //             'success' => true,
+    //             'categories' => $decodedCategories
+    //         ]);
+    //     } catch (\Exception $e) {
+    //         return response()->json(['error' => $e->getMessage()], 500);
+    //     }
+    // }
 
     /**
      * printCategory

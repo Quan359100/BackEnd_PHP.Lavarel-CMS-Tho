@@ -19,6 +19,9 @@ use Modules\Article\Http\Controllers\CategoriesController;
 // get random article
 Route::get('pages/random', [PagesController::class, 'getRandomPages']);
 
+// get random article
+Route::get('pages', [PagesController::class, 'getAllPagesSortedByDate']);
+
 // get  categories
 Route::get('/categories', [CategoriesController::class, 'getCategories']);
 

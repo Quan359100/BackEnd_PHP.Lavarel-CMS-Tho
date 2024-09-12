@@ -7,9 +7,9 @@
                 @elseif(Route::is('admin.authors.create'))
                     Tạo Thông tin Tác Giả     
                 @elseif(Route::is('admin.authors.edit'))
-                    Sửa Thông tin Tác Giả <span class="badge badge-info">{{ $author->title }}</span>
+                    Sửa Thông tin Tác Giả <span class="badge badge-info">{{ $authors->title }}</span>
                 @elseif(Route::is('admin.authors.show'))
-                    Thông tin chi tiết tác giả <span class="badge badge-info">{{ $author->title }}</span>
+                    Thông tin chi tiết tác giả <span class="badge badge-info">{{ $authors->title }}</span>
                     <a  class="btn btn-outline-success btn-sm" href="{{ route('admin.authors.edit', $author->id) }}"> <i class="fa fa-edit"></i></a>
                 @endif
             </h4>

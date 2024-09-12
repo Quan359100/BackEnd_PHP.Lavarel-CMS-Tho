@@ -46,6 +46,12 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label" for="image">Banner Ảnh <span class="optional">(optional)</span></label>
+                                    <input type="file" class="form-control dropify" data-height="70" data-allowed-file-extensions="png jpg jpeg webp" id="banner_image" name="banner_image" data-default-file="{{ $category->banner_image != null ? asset('public/assets/images/category/'.$category->banner_image) : null }}"/>
+                                </div>
+                            </div>
                         </div>
                         <div class="row ">
                             <div class="col-md-6">

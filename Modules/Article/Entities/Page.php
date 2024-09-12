@@ -12,7 +12,7 @@ class Page extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'slug', 'authors', 'image', 'description', 'meta_description', 'category_id', 'article_type_id',  'status', 'deleted_at', 'created_by', 'updated_by', 'deleted_by', 'tag','pub_date'
+        'title', 'slug', 'authors', 'image' , 'banner_image' , 'description', 'short_description', 'category_id', 'article_type_id',  'status', 'deleted_at', 'created_by', 'updated_by', 'deleted_by', 'tag','pub_date'
     ];
 
     /**
@@ -23,6 +23,12 @@ class Page extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    // Thiết lập mối quan hệ với bảng Author
+        public function author()
+    {
+        return $this->belongsTo(Author::class, 'authors');
     }
 
     /**

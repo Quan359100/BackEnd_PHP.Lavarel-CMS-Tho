@@ -15,7 +15,7 @@
                 <div class="form-body">
                     <div class="card-body">
                         <div class="row ">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="control-label" for="title">Tên Câu Thơ Random <span class="required">*</span></label>
                                     <input type="text" class="form-control" id="title" name="title"
@@ -24,12 +24,19 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
+                                    <label class="control-label" for="author">Tác Giả</label>
+                                    <input type="text" class="form-control" id="author" name="author"
+                                        value="{{ old('author') }}" placeholder="Nhập Tác Giả " required="" />
+                                </div>
+                            </div>                            
+                            <div class="col-md-3">
+                                <div class="form-group">
                                     <label class="control-label" for="date">Chọn Ngày</label>
                                     <input type="date" class="form-control" id="date" name="date"
                                         value="{{ old('date') }}" placeholder="Chọn Ngày" required="" />
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="form-group has-success">
                                     <label class="control-label" for="status">Status <span class="required">*</span></label>
                                     <select class="form-control custom-select" id="status" name="status" required>
@@ -38,7 +45,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2"></div>
+
                         </div>
 
                         <div class="row">

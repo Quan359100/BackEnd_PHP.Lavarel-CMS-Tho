@@ -14,7 +14,7 @@ class Poetry extends Model
      */
     protected $table = 'poems'; 
     protected $fillable = [
-        'title', 'slug', 'description', 'deleted_at', 'created_by', 'updated_by', 'deleted_by','status'
+        'title', 'slug', 'description', 'author', 'deleted_at', 'created_by', 'updated_by', 'deleted_by','status'
     ];
 
     /**

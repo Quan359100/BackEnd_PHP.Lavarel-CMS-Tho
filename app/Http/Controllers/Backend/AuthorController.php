@@ -27,6 +27,57 @@ class AuthorController extends Controller
     }
 
     /**
+     * Get all authors with their details and page count (API)
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getAllAuthors(Request $request)
+    {
+        try {
+            // Lấy tất cả các tác giả từ bảng Author
+            $authors = Author::select('id', 'authors', 'description', 'image', 'face_url', 'x_url')
+                            ->get();
+    
+            if ($authors->isEmpty()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'No authors found'
+                ], 404);
+            }
+    
+            // Lấy số lượng Page cho mỗi tác giả dựa trên tên tác giả
+            $authorsWithPageCount = $authors->map(function($author) {
+                $pageCount = Page::where('authors', $author->authors)->count(); // 'authors' là trường lưu tên tác giả trong bảng Page
+                
+                // Xây dựng đường dẫn đầy đủ cho hình ảnh
+                $fullImageUrl = $author->image ? url('public/assets/images/authors/' . $author->image) : null;
+    
+                return [
+                    'author_id' => $author->id,
+                    'name' => $author->authors,
+                    'bio' => $author->description,
+                    'image' => $fullImageUrl,
+                    'facebook_url' => $author->face_url,
+                    'x_url' => $author->x_url,
+                    'page_count' => $pageCount, // Số lượng Page của tác giả
+                ];
+            });
+    
+            return response()->json([
+                'status' => 'success',
+                'data' => $authorsWithPageCount
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -206,12 +257,14 @@ class AuthorController extends Controller
             DB::beginTransaction();
             $author = new Author();
             if (!is_null($request->image)) {
-                $author->image = UploadHelper::upload('image', $request->image, $request->title . '-' . time() . '-logo', 'public/assets/images/blogs');
+                $author->image = UploadHelper::upload('image', $request->image, $request->title . '-' . time() . '-logo', 'public/assets/images/authors');
             }
 
             $author->status = $request->status;
             $author->authors = $request->authors;
             $author->description = $request->description;
+            $author->face_url = $request->face_url;
+            $author->x_url = $request->x_url;
             $author->created_at = Carbon::now();
             $author->created_by = Auth::id();
             $author->updated_at = Carbon::now();
@@ -256,9 +309,9 @@ class AuthorController extends Controller
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
         }
-        $author = Author::find($id);
+        $authors = Author::find($id);
         $authorsPage = Page::select('authors')->distinct()->get();
-        return view('backend.pages.authors.edit', compact('author', 'authorsPage'));
+        return view('backend.pages.authors.edit', compact('authors', 'authorsPage'));
     }
 
     /**
@@ -274,36 +327,37 @@ class AuthorController extends Controller
             $message = 'You are not allowed to access this page !';
             return view('errors.403', compact('message'));
         }
-
+    
         $author = Author::find($id);
         if (is_null($author)) {
-            session()->flash('error', "The page is not found !");
+            session()->flash('error', "The author is not found!");
             return redirect()->route('admin.authors.index');
         }
-
+    
         $request->validate([
-            'authors' => 'required|string|in:' . Page::select('authors')->distinct()->pluck('authors')->implode(','),
+            'authors' => 'required|string', // Bạn có thể điều chỉnh validation này nếu cần
         ]);
-
+    
         try {
             DB::beginTransaction();
-
-
-
+    
             if (!is_null($request->image)) {
-                $author->image = UploadHelper::update('image', $request->image, $request->title . '-' . time() . '-logo', 'public/assets/images/blogs', $author->image);
+                // Cập nhật hình ảnh tác giả
+                $author->image = UploadHelper::update('image', $request->image, $author->authors . '-' . time() . '-logo', 'public/assets/images/authors', $author->image);
             }
-
+    
+            // Cập nhật thông tin tác giả
             $author->authors = $request->authors;
+            $author->face_url = $request->face_url;
+            $author->x_url = $request->x_url;
             $author->status = $request->status;
             $author->description = $request->description;
             $author->updated_by = Auth::id();
             $author->updated_at = Carbon::now();
             $author->save();
-
-            //Track::newTrack($author->title, 'Thông tin tác giả has been updated successfully !!');
+    
             DB::commit();
-            session()->flash('success', 'Thông tin tác giả has been updated successfully !!');
+            session()->flash('success', 'Thông tin tác giả has been updated successfully!');
             return redirect()->route('admin.authors.index');
         } catch (\Exception $e) {
             session()->flash('sticky_error', $e->getMessage());

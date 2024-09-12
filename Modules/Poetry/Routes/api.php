@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-
+use Modules\Poetry\Http\Controllers\PoetryController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -12,3 +12,5 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+// get random article
+Route::get('poetry/random', [PoetryController::class, 'getRandomPoetry']);

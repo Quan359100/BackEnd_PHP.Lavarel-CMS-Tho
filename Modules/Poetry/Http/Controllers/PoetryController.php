@@ -28,6 +28,45 @@ class PoetryController extends Controller
     }
 
     /**
+     * Get random Poetry (API)
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+
+    public function getRandomPoetry(Request $request)
+    {
+        $limit = $request->input('limit', 1); // Lấy tham số 'limit', mặc định là 1
+        $limit = min(max($limit, 1), 10); // Giới hạn giá trị 'limit' từ 1 đến 10
+    
+        try {
+            $pages = Poetry::inRandomOrder()->limit($limit)->get();
+    
+            // Decode HTML entities for all fields of each page
+            $decodedPages = $pages->map(function ($page) {
+                foreach ($page->getAttributes() as $key => $value) {
+                    // Check if the value is a string before decoding
+                    if (is_string($value)) {
+                        $page->$key = html_entity_decode($value, ENT_QUOTES, 'UTF-8');
+                    }
+                }
+                return $page;
+            });
+    
+            return response()->json([
+                'status' => 'success',
+                'data' => $decodedPages
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }    
+
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -133,28 +172,6 @@ class PoetryController extends Controller
                 ->editColumn('title', function ($row) {
                     return $row->title;
                 })
-                ->editColumn('banner_image', function ($row) {
-                    if ($row->banner_image != null) {
-                        return "<img src='" . asset('public/images/services/' . $row->banner_image) . "' class='img img-display-list' />";
-                    }
-                    return '-';
-                })
-                ->editColumn('image', function ($row) {
-                    if ($row->image != null) {
-                        return "<img src='" . asset('public/images/services/' . $row->image) . "' class='img img-display-list' />";
-                    }
-                    return '-';
-                })
-                ->addColumn('category', function ($row) {
-                    $html = "";
-                    $category = Category::find($row->category_id);
-                    if (!is_null($category)) {
-                        $html .= "<span>" . $category->name . "</span>";
-                    } else {
-                        $html .= "-";
-                    }
-                    return $html;
-                })
                 ->editColumn('status', function ($row) {
                     if ($row->status) {
                         return '<span class="badge badge-success font-weight-100">Active</span>';
@@ -164,7 +181,7 @@ class PoetryController extends Controller
                         return '<span class="badge badge-warning">Inactive</span>';
                     }
                 });
-            $rawColumns = ['action', 'title', 'status', 'category', 'banner_image', 'image'];
+            $rawColumns = ['action', 'title', 'status', 'description', 'author'];
             return $datatable->rawColumns($rawColumns)
                 ->make(true);
         }
@@ -216,6 +233,7 @@ class PoetryController extends Controller
             
             $poetries->status = $request->status;
             $poetries->description = $request->description;
+            $poetries->author = $request->author;
             $poetries->date = $request->date;
             $poetries->created_at = Carbon::now();
             $poetries->created_by = Auth::id();
@@ -297,6 +315,7 @@ class PoetryController extends Controller
             $poetries->slug = $request->slug;
             $poetries->status = $request->status;
             $poetries->description = $request->description;
+            $poetries->author = $request->author;
             $poetries->save();
 
             Track::newTrack($poetries->title, 'Câu Thơ đã được update!!');

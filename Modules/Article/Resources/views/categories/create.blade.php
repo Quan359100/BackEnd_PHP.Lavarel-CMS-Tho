@@ -50,6 +50,15 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label" for="image">Ảnh Banner <span
+                                            class="optional">(optional)</span></label>
+                                    <input type="file" class="form-control dropify" data-height="70"
+                                        data-allowed-file-extensions="png jpg jpeg webp" id="banner_image" name="banner_image"
+                                        value="{{ old('banner_image') }}" />
+                                </div>
+                            </div>
                         </div>
 
 
